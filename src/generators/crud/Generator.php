@@ -104,6 +104,7 @@ class Generator extends \yii\gii\Generator
             [['enableI18N', 'enablePjax'], 'boolean'],
             ['messageCategory', 'validateMessageCategory', 'skipOnEmpty' => false],
             ['viewPath', 'safe'],
+            ['frontendFramework', 'required']
         ]);
     }
 

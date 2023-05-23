@@ -16,12 +16,12 @@ if (empty($safeAttributes)) {
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use <?= $generator->frontendPhpClass('yii\helpers\Html') ?>;
+use <?= $generator->frontendPhpClass('yii\widgets\ActiveForm') ?>;
 
 /** @var yii\web\View $this */
 /** @var <?= ltrim($generator->modelClass, '\\') ?> $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var <?= $generator->frontendPhpClass('yii\widgets\ActiveForm') ?> $form */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-form">
@@ -33,8 +33,8 @@ use yii\widgets\ActiveForm;
         echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
     }
 } ?>
-    <div class="form-group">
-        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Save') ?>, ['class' => 'btn btn-success']) ?>
+    <div class="<?= $generator->frontendHtmlClass('formGroup') ?>">
+        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Save') ?>, ['class' => '<?= $generator->frontendHtmlClass('buttonSuccess') ?>']) ?>
     </div>
 
     <?= "<?php " ?>ActiveForm::end(); ?>

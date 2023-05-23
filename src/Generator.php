@@ -57,6 +57,8 @@ abstract class Generator extends Model
      */
     public $messageCategory = 'app';
 
+    public $frontendFramework = 'bootstrap5';
+
 
     /**
      * Returns the name of the code generator.
@@ -97,6 +99,7 @@ abstract class Generator extends Model
             'template' => 'Template/view group',
             'enableI18N' => 'Enable I18N',
             'messageCategory' => 'Message Category',
+            'frontendFramework' => 'Frontend framework',
         ];
     }
 
@@ -120,7 +123,7 @@ abstract class Generator extends Model
      */
     public function stickyAttributes()
     {
-        return ['template', 'enableI18N', 'messageCategory'];
+        return ['template', 'enableI18N', 'messageCategory', 'frontendFramework'];
     }
 
     /**
@@ -135,6 +138,7 @@ abstract class Generator extends Model
             'enableI18N' => 'This indicates whether the generator should generate strings using <code>Yii::t()</code> method.
                 Set this to <code>true</code> if you are planning to make your application translatable.',
             'messageCategory' => 'This is the category used by <code>Yii::t()</code> in case you enable I18N.',
+            'frontendFramework' => 'Choose the framework to use specific php widgets and html classes.',
         ];
     }
 
@@ -214,6 +218,7 @@ abstract class Generator extends Model
             [['template'], 'validateTemplate'],
             [['enableI18N'], 'boolean'],
             [['messageCategory'], 'string'],
+            ['frontendFramework', 'safe']
         ];
     }
 
@@ -531,5 +536,60 @@ abstract class Generator extends Model
             }
         }
         return $str;
+    }
+
+    public $frontendFrameworks = [];
+
+    public function getFrontendFrameworksForDropdown() {
+        $result=[];
+        foreach ($this->frontendFrameworks as $key => $config) {
+            $result[$key]=$config['name'];
+        }
+        return $result;
+    }
+
+    /**
+     * - Call from views
+     * - Two methods to get php class and html class
+     * - Definition for different bootstrap versions
+     * - Input to ask frontend framework in the generator form 
+     *  - Add it to CRUD & FORM generators
+     * 
+     * TODO: FALTA FORM GENERATOR
+     */
+
+    /**
+     * Dummy for now
+     *
+     * @param string $string the text be generated
+     * @return string
+     */
+    public function frontendPhpClass($string)
+    {
+        if (isset($this->frontendFrameworks[$this->frontendFramework])) {
+            $options=$this->frontendFrameworks[$this->frontendFramework];
+            if (isset($options['phpClasses']) && isset($options['phpClasses'][$string])) {
+                return $options['phpClasses'][$string];
+            }
+        }
+        return $string;
+    }
+
+    
+    /**
+     * Dummy for now
+     *
+     * @param string $string the text be generated
+     * @return string
+     */
+    public function frontendHtmlClass($string)
+    {
+        if (isset($this->frontendFrameworks[$this->frontendFramework])) {
+            $options=$this->frontendFrameworks[$this->frontendFramework];
+            if (isset($options['htmlClasses']) && isset($options['htmlClasses'][$string])) {
+                return $options['htmlClasses'][$string];
+            }
+        }
+        return $string;
     }
 }

@@ -11,7 +11,7 @@ $urlParams = $generator->generateUrlParams();
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
+use <?= $generator->frontendPhpClass('yii\helpers\Html') ?>;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 
     <p>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => 'btn btn-primary']) ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Update') ?>, ['update', <?= $urlParams ?>], ['class' => '<?= $generator->frontendHtmlClass('buttonPrimary') ?>']) ?>
         <?= "<?= " ?>Html::a(<?= $generator->generateString('Delete') ?>, ['delete', <?= $urlParams ?>], [
-            'class' => 'btn btn-danger',
+            'class' => '<?= $generator->frontendHtmlClass('buttonDanger') ?>',
             'data' => [
                 'confirm' => <?= $generator->generateString('Are you sure you want to delete this item?') ?>,
                 'method' => 'post',

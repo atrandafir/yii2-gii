@@ -15,3 +15,4 @@ echo $form->field($generator, 'indexWidgetType')->dropDownList([
 echo $form->field($generator, 'enableI18N')->checkbox();
 echo $form->field($generator, 'enablePjax')->checkbox();
 echo $form->field($generator, 'messageCategory');
+echo $form->field($generator, 'frontendFramework')->dropDownList($generator->getFrontendFrameworksForDropdown());

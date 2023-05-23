@@ -135,6 +135,7 @@ class DefaultController extends Controller
             $this->generator = $this->module->generators[$id];
             $this->generator->loadStickyAttributes();
             $this->generator->load(Yii::$app->request->post());
+            $this->generator->frontendFrameworks = $this->module->frontendFrameworks;
 
             return $this->generator;
         }

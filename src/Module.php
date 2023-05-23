@@ -82,6 +82,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $newDirMode = 0777;
 
+    /**
+     * TBD
+     */
+    public $frontendFrameworks = [];
+
 
     /**
      * {@inheritdoc}
@@ -125,6 +130,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
         }
 
         $this->resetGlobalSettings();
+
+        $this->frontendFrameworks = array_merge($this->coreFrontendFrameworks(), $this->frontendFrameworks);
 
         return true;
     }
@@ -178,6 +185,51 @@ class Module extends \yii\base\Module implements BootstrapInterface
             'form' => ['class' => 'yii\gii\generators\form\Generator'],
             'module' => ['class' => 'yii\gii\generators\module\Generator'],
             'extension' => ['class' => 'yii\gii\generators\extension\Generator'],
+        ];
+    }
+
+    protected function coreFrontendFrameworks()
+    {
+        return [
+            'bootstrap3' => [
+                'name' => 'Bootstrap 3',
+                'phpClasses' => [],
+                'htmlClasses' => [
+                    'formGroup' => 'form-group',
+                    'buttonSuccess' => 'btn btn-success',
+                    'buttonPrimary' => 'btn btn-primary',
+                    'buttonOutlineSecondary' => 'btn btn-outline-secondary',
+                    'buttonDanger' => 'btn btn-danger',
+                ],
+            ],
+            'bootstrap4' => [
+                'name' => 'Bootstrap 4',
+                'phpClasses' => [
+                    'yii\helpers\Html'=>'yii\bootstrap4\Html',
+                    'yii\widgets\ActiveForm'=>'yii\bootstrap4\ActiveForm',
+                ],
+                'htmlClasses' => [
+                    'formGroup' => 'form-group',
+                    'buttonSuccess' => 'btn btn-success',
+                    'buttonPrimary' => 'btn btn-primary',
+                    'buttonOutlineSecondary' => 'btn btn-outline-secondary',
+                    'buttonDanger' => 'btn btn-danger',
+                ],
+            ],
+            'bootstrap5' => [
+                'name' => 'Bootstrap 5',
+                'phpClasses' => [
+                    'yii\helpers\Html'=>'yii\bootstrap5\Html',
+                    'yii\widgets\ActiveForm'=>'yii\bootstrap5\ActiveForm',
+                ],
+                'htmlClasses' => [
+                    'formGroup' => 'mb-3',
+                    'buttonSuccess' => 'btn btn-success',
+                    'buttonPrimary' => 'btn btn-primary',
+                    'buttonOutlineSecondary' => 'btn btn-outline-secondary',
+                    'buttonDanger' => 'btn btn-danger',
+                ],
+            ],
         ];
     }
 

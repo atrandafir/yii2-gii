@@ -19,7 +19,7 @@ if ($generator->enableI18N) {
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
+use <?= $generator->frontendPhpClass('yii\helpers\Html') ?>;
 
 /** @var yii\web\View $this */
 /** @var <?= ltrim($generator->modelClass, '\\') ?> $model */

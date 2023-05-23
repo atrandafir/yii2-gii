@@ -12,7 +12,7 @@ echo "<?php\n";
 ?>
 
 use <?= $generator->modelClass ?>;
-use yii\helpers\Html;
+use <?= $generator->frontendPhpClass('yii\helpers\Html') ?>;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use <?= $generator->indexWidgetType === 'grid' ? "yii\\grid\\GridView" : "yii\\widgets\\ListView" ?>;
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= "<?= " ?>Html::encode($this->title) ?></h1>
 
     <p>
-        <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => 'btn btn-success']) ?>
+        <?= "<?= " ?>Html::a(<?= $generator->generateString('Create ' . Inflector::camel2words(StringHelper::basename($generator->modelClass))) ?>, ['create'], ['class' => '<?= $generator->frontendHtmlClass('buttonSuccess') ?>']) ?>
     </p>
 
 <?= $generator->enablePjax ? "    <?php Pjax::begin(); ?>\n" : '' ?>

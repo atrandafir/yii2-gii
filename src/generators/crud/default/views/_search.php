@@ -9,12 +9,12 @@ use yii\helpers\StringHelper;
 echo "<?php\n";
 ?>
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use <?= $generator->frontendPhpClass('yii\helpers\Html') ?>;
+use <?= $generator->frontendPhpClass('yii\widgets\ActiveForm') ?>;
 
 /** @var yii\web\View $this */
 /** @var <?= ltrim($generator->searchModelClass, '\\') ?> $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var <?= $generator->frontendPhpClass('yii\widgets\ActiveForm') ?> $form */
 ?>
 
 <div class="<?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>-search">
@@ -39,9 +39,9 @@ foreach ($generator->getColumnNames() as $attribute) {
     }
 }
 ?>
-    <div class="form-group">
-        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => 'btn btn-primary']) ?>
-        <?= "<?= " ?>Html::resetButton(<?= $generator->generateString('Reset') ?>, ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="<?= $generator->frontendHtmlClass('formGroup') ?>">
+        <?= "<?= " ?>Html::submitButton(<?= $generator->generateString('Search') ?>, ['class' => '<?= $generator->frontendHtmlClass('buttonPrimary') ?>']) ?>
+        <?= "<?= " ?>Html::resetButton(<?= $generator->generateString('Reset') ?>, ['class' => '<?= $generator->frontendHtmlClass('buttonOutlineSecondary') ?>']) ?>
     </div>
 
     <?= "<?php " ?>ActiveForm::end(); ?>
